@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simulacion examen</title>
+        <script>
+            function Submit(){
+                let resps = [];
+                for(let i=0;i<4;i++){
+                    resps.push(document.getElementById(`${i}`));
+                    
+                }
+                if(resps[0].checked||resps[1].checked||resps[2].checked||resps[3].checked){
+                    let j = 0;
+                    console.log(resps[0].value);
+                    let answer;
+                    if(resps[0].checked){
+                        answer = 'Las faciles';
+                        
+                    }
+                    if(resps[1].checked){
+                        answer="Las que no pasan lista"
+
+                    }
+                    if(resps[2].checked){
+                        answer="Las de despues de las 9:00AM"
+                      
+                    }
+                    if(resps[3].checked){
+                        answer="Las que no dejan tarea";
+                       
+                    }
+                    let num = 0;
+                    axios.post('/respuesta',{answer,num}).then(()=>{
+                        window.location.href = `http://localhost:4000/pregunta2`;
+                    });
+                    
+                }else{
+                    alert('Selecciona una opcion')
+                }
+                
+            }
+            function p2(){
+                window.location.href = `http://localhost:4000/pregunta2`;
+            }
+            function p3(){
+                window.location.href = `http://localhost:4000/pregunta3`;
+            }
+        </script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        <button onclick="p2()">P2</button>
+        <button onclick="p3()">P3</button>
+        <h1>
+           Pregunta 1 
+        </h1>
+        Que materias te gustan?
+        <br><br>
+        <input type="radio" id="0" name="materia" value="Las faciles">
+        <label for="Las faciles">Las faciles</label>
+
+        <input type="radio" id="1" name="materia" value="Las que no pasan lista">
+        <label for="Las que no pasan lista">Las que no pasan lista</label> 
+        
+        <input type="radio" id="2" name="materia" value="Las de despues de las 9:00AM">
+        <label for="Las de despues de las 9:00AM">Las de despues de las 9:00AM</label>
+
+        <input type="radio" id="3" name="materia" value="Las que no dejan tarea">
+        <label for="Las que no dejan tarea">Las que no dejan tarea</label><br>
+        <button onclick="Submit()">Enviar respuestas</button>
+    </body>
+</html>

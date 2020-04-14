@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simulacion examen</title>
+        
+        <script>
+            let respestas = [];
+            
+            /*for(let i=0;i<4;i++){
+                    respuestas.push(document.getElementById(`${i}`));
+            }
+            for(let j=0;j<4;j++){
+                if(respuestas[j].value ===)
+            }*/
+            function Submit(){
+                let resps = [];
+                for(let i=0;i<4;i++){
+                    resps.push(document.getElementById(`${i}`));
+                    
+                }
+                if(resps[0].checked||resps[1].checked||resps[2].checked||resps[3].checked){
+                    let j = 0;
+                    console.log(resps[0].value);
+                    let answer = ' ';
+                    if(resps[0].checked){
+                        answer += ' Linux';
+                        
+                    }
+                    if(resps[1].checked){
+                        answer += ' macOs';
+
+                    }
+                    if(resps[2].checked){
+                        answer += ' Windows';
+                      
+                    }
+                    if(resps[3].checked){
+                        answer += ' Otro';
+                       
+                    }
+                    let num = 1;
+                    axios.post('/respuesta',{answer,num}).then(()=>{
+                        window.location.href = `http://localhost:4000/pregunta3`;
+                    });
+                    
+                }else{
+                    alert('Selecciona una opcion')
+                }
+                
+            }
+            function p1(){
+                window.location.href = `http://localhost:4000/pregunta1`;
+            }
+            function p3(){
+                window.location.href = `http://localhost:4000/pregunta3`;
+            }
+        </script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+
+        <button onclick="p1()">P1</button>
+        <button onclick="p3()">P3</button>
+        <h1>
+           Pregunta 2
+        </h1>
+        Que sistema(s) operativo(s) sabes usar?
+        <br><br>
+        <input type="checkbox" id="0" name="materia" value="Linux">
+        <label for="Linux">Linux</label>
+
+        <input type="checkbox"" id="1" name="materia" value="macOS">
+        <label for="macOS">macOS</label> 
+        
+        <input type="checkbox" id="2" name="materia" value="Windows">
+        <label for="Windows">Windows</label>
+
+        <input type="checkbox" id="3" name="materia" value="Otro">
+        <label for="Otro">Otro</label><br>
+        <button onclick="Submit()">Enviar respuestas</button>
+    </body>
+</html>
