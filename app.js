@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const port = 4000;
+const port = process.env.PORT||4000;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const db = require('tnc_mysql_connector');
@@ -14,7 +14,7 @@ app.use(session({
     saveUninitialized: true,
     cookie:{maxAge:100000}
 }));
-db.connectRaw({host: "127.0.0.1", user: "admin", password: "ironman18", database:"myDB"});
+
 
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
